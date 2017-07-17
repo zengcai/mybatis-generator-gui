@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Owen on 6/12/16.
@@ -17,6 +19,13 @@ public class DbUtil {
 
     private static final Logger _LOG = LoggerFactory.getLogger(DbUtil.class);
     private static final int DB_CONNECTION_TIMEOUTS_SECONDS = 1;
+
+    private static final Map<String, String> JDBC_JAVA_TYPE = new HashMap<>();
+    static {
+        JDBC_JAVA_TYPE.put("TINYINT", "Integer");
+        JDBC_JAVA_TYPE.put("BIT", "Integer");
+        JDBC_JAVA_TYPE.put("DECIMAL", "BigDecimal");
+    }
 
     public static Connection getConnection(DatabaseConfig config) throws ClassNotFoundException, SQLException {
 		DriverManager.setLoginTimeout(DB_CONNECTION_TIMEOUTS_SECONDS);
@@ -50,8 +59,13 @@ public class DbUtil {
         while (rs.next()) {
             UITableColumnVO columnVO = new UITableColumnVO();
             String columnName = rs.getString("COLUMN_NAME");
+            String typeName = rs.getString("TYPE_NAME");
             columnVO.setColumnName(columnName);
-            columnVO.setJdbcType(rs.getString("TYPE_NAME"));
+            columnVO.setJdbcType(typeName);
+            typeName = typeName.replaceAll("UNSIGNED", "").trim();
+            if (null != JDBC_JAVA_TYPE.get(typeName)) {
+                columnVO.setJavaType(JDBC_JAVA_TYPE.get(typeName));
+            }
             columns.add(columnVO);
         }
         return columns;

@@ -15,6 +15,9 @@ public class MyStringUtils {
     public static String dbStringToCamelStyle(String str) {
         if (str != null) {
             StringBuilder sb = new StringBuilder();
+            if (str.startsWith("t_")) {//表名t_开头的去掉
+                str = str.replaceFirst("t_", "");
+            }
             sb.append(String.valueOf(str.charAt(0)).toUpperCase());
             for (int i = 1; i < str.length(); i++) {
                 char c = str.charAt(i);

@@ -40,6 +40,10 @@ public class GeneratorConfig {
 
 	private boolean comment;
 
+	private boolean deleteMethod;
+
+	private boolean countMethod;
+
 	private boolean annotation;
 
 	private String generateKeys;
@@ -170,5 +174,21 @@ public class GeneratorConfig {
 
 	public void setGenerateKeys(String generateKeys) {
 		this.generateKeys = generateKeys;
+	}
+
+	public boolean isDeleteMethod() {
+		return deleteMethod;
+	}
+
+	public void setDeleteMethod(boolean deleteMethod) {
+		this.deleteMethod = deleteMethod;
+	}
+
+	public boolean isCountMethod() {
+		return countMethod;
+	}
+
+	public void setCountMethod(boolean countMethod) {
+		this.countMethod = countMethod;
 	}
 }

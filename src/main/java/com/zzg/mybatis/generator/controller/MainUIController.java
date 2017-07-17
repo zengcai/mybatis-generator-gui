@@ -35,8 +35,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static org.junit.Assert.assertNotNull;
-
 public class MainUIController extends BaseFXController {
 
     private static final Logger _LOG = LoggerFactory.getLogger(MainUIController.class);
@@ -72,6 +70,10 @@ public class MainUIController extends BaseFXController {
     private CheckBox offsetLimitCheckBox;
     @FXML
     private CheckBox commentCheckBox;
+    @FXML
+    private CheckBox deleteMethodCheckBox;
+    @FXML
+    private CheckBox countMethodCheckBox;
     @FXML
     private CheckBox annotationCheckBox;
     @FXML
@@ -168,7 +170,10 @@ public class MainUIController extends BaseFXController {
                         selectedDatabaseConfig = (DatabaseConfig) treeItem.getParent().getGraphic().getUserData();
                         this.tableName = tableName;
                         tableNameField.setText(tableName);
-                        domainObjectNameField.setText(MyStringUtils.dbStringToCamelStyle(tableName));
+                        String entityName = MyStringUtils.dbStringToCamelStyle(tableName);//设置实体名
+                        domainObjectNameField.setText(entityName);
+                        mapperName.setText(entityName + "Mapper");
+                        openTableColumnCustomizationPage();
                     }
                 }
             });
@@ -288,6 +293,8 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setDomainObjectName(domainObjectNameField.getText());
         generatorConfig.setOffsetLimit(offsetLimitCheckBox.isSelected());
         generatorConfig.setComment(commentCheckBox.isSelected());
+        generatorConfig.setDeleteMethod(deleteMethodCheckBox.isSelected());
+        generatorConfig.setCountMethod(countMethodCheckBox.isSelected());
         generatorConfig.setAnnotation(annotationCheckBox.isSelected());
         return generatorConfig;
     }

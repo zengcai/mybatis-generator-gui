@@ -138,6 +138,23 @@ public class MybatisGeneratorBridge {
             pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.MySQLLimitPlugin");
             context.addPluginConfiguration(pluginConfiguration);
         }
+
+        //是否生成delete方法
+        if (!generatorConfig.isDeleteMethod()) {
+            //不生成
+            PluginConfiguration pluginConfiguration = new PluginConfiguration();
+            pluginConfiguration.addProperty("type", "com.zzg.mybatis.generator.config.DeleteMethodConfig");
+            pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.config.DeleteMethodConfig");
+            context.addPluginConfiguration(pluginConfiguration);
+        }
+        //是否生成count方法
+        if (!generatorConfig.isCountMethod()) {
+            //不生成
+            PluginConfiguration pluginConfiguration = new PluginConfiguration();
+            pluginConfiguration.addProperty("type", "com.zzg.mybatis.generator.config.CountMethodConfig");
+            pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.config.CountMethodConfig");
+            context.addPluginConfiguration(pluginConfiguration);
+        }
         context.setTargetRuntime("MyBatis3");
 
         List<String> warnings = new ArrayList<>();
