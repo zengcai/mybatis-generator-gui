@@ -4,6 +4,7 @@ import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.model.DbType;
 import com.zzg.mybatis.generator.model.GeneratorConfig;
 import com.zzg.mybatis.generator.plugins.DbRemarksCommentGenerator;
+import com.zzg.mybatis.generator.plugins.ExampleTargetPlugin;
 import com.zzg.mybatis.generator.util.ConfigHelper;
 import com.zzg.mybatis.generator.util.DbUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -124,13 +125,26 @@ public class MybatisGeneratorBridge {
             commentConfig.addProperty("annotations", "true");
         }
         context.setCommentGeneratorConfiguration(commentConfig);
-        
+
+        configPlugin(context);
+
+        context.setTargetRuntime("MyBatis3");
+
+        List<String> warnings = new ArrayList<>();
+        Set<String> fullyqualifiedTables = new HashSet<>();
+        Set<String> contexts = new HashSet<>();
+        ShellCallback shellCallback = new DefaultShellCallback(true); // override=true
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, shellCallback, warnings);
+        myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
+    }
+
+    private void configPlugin(Context context) {
         //实体添加序列化
         PluginConfiguration serializablePluginConfiguration = new PluginConfiguration();
         serializablePluginConfiguration.addProperty("type", "org.mybatis.generator.plugins.SerializablePlugin");
         serializablePluginConfiguration.setConfigurationType("org.mybatis.generator.plugins.SerializablePlugin");
         context.addPluginConfiguration(serializablePluginConfiguration);
-        
+
         // limit/offset插件
         if (generatorConfig.isOffsetLimit()) {
             PluginConfiguration pluginConfiguration = new PluginConfiguration();
@@ -155,14 +169,72 @@ public class MybatisGeneratorBridge {
             pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.config.CountMethodConfig");
             context.addPluginConfiguration(pluginConfiguration);
         }
-        context.setTargetRuntime("MyBatis3");
 
-        List<String> warnings = new ArrayList<>();
-        Set<String> fullyqualifiedTables = new HashSet<>();
-        Set<String> contexts = new HashSet<>();
-        ShellCallback shellCallback = new DefaultShellCallback(true); // override=true
-        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, shellCallback, warnings);
-        myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
+        if (generatorConfig.isSelectKeyForUpdateMethodCheckBox()) {
+            //生成SelectByPrimaryKeyForUpdate
+            PluginConfiguration pluginConfiguration = new PluginConfiguration();
+            pluginConfiguration.addProperty("type", "com.zzg.mybatis.generator.plugins.SelectByPrimaryKeyForUpdatePlugin");
+            pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.SelectByPrimaryKeyForUpdatePlugin");
+            context.addPluginConfiguration(pluginConfiguration);
+        }
+        //UseGeneratedKeyPlugin
+        if (generatorConfig.isUseGenKey()) {
+            PluginConfiguration useGeneratedKeyPlugin = new PluginConfiguration();
+            useGeneratedKeyPlugin.addProperty("type", "com.zzg.mybatis.generator.plugins.UseGeneratedKeyPlugin");
+            useGeneratedKeyPlugin.setConfigurationType("com.zzg.mybatis.generator.plugins.UseGeneratedKeyPlugin");
+            context.addPluginConfiguration(useGeneratedKeyPlugin);
+        }
+
+        if (generatorConfig.isBatchInsert()) {
+            //生成batch insert
+            PluginConfiguration pluginConfiguration = new PluginConfiguration();
+            pluginConfiguration.addProperty("type", "com.itfsw.mybatis.generator.plugins.BatchInsertPlugin");
+            pluginConfiguration.setConfigurationType("com.itfsw.mybatis.generator.plugins.BatchInsertPlugin");
+            context.addPluginConfiguration(pluginConfiguration);
+            //需要配合ModelColumnPlugin使用
+            PluginConfiguration modelColumnPlugin = new PluginConfiguration();
+            modelColumnPlugin.addProperty("type", "com.itfsw.mybatis.generator.plugins.ModelColumnPlugin");
+            modelColumnPlugin.setConfigurationType("com.itfsw.mybatis.generator.plugins.ModelColumnPlugin");
+            context.addPluginConfiguration(modelColumnPlugin);
+        }
+
+        if (generatorConfig.isSelectOne()) {
+            /*生成select one*/
+            PluginConfiguration pluginConfiguration = new PluginConfiguration();
+            pluginConfiguration.addProperty("type", "com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin");
+            pluginConfiguration.setConfigurationType("com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin");
+            context.addPluginConfiguration(pluginConfiguration);
+        }
+
+        if (!generatorConfig.isInsertUpdateAll()) {
+            /*不生产InsertUpdateAll*/
+            PluginConfiguration pluginConfiguration = new PluginConfiguration();
+            pluginConfiguration.addProperty("type", "com.zzg.mybatis.generator.config.InsertUpdateAllMethodConfig");
+            pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.config.InsertUpdateAllMethodConfig");
+            context.addPluginConfiguration(pluginConfiguration);
+        }
+
+        if (generatorConfig.isSelectSelective()) {
+            //需要配合ModelColumnPlugin使用
+            PluginConfiguration modelColumnPlugin = new PluginConfiguration();
+            modelColumnPlugin.addProperty("type", "com.itfsw.mybatis.generator.plugins.ModelColumnPlugin");
+            modelColumnPlugin.setConfigurationType("com.itfsw.mybatis.generator.plugins.ModelColumnPlugin");
+            context.addPluginConfiguration(modelColumnPlugin);
+
+            PluginConfiguration selectSelectivePlugin = new PluginConfiguration();
+            selectSelectivePlugin.addProperty("type", "com.itfsw.mybatis.generator.plugins.SelectSelectivePlugin");
+            selectSelectivePlugin.setConfigurationType("com.itfsw.mybatis.generator.plugins.SelectSelectivePlugin");
+            context.addPluginConfiguration(selectSelectivePlugin);
+        }
+
+        /*更改example路径*/
+        String modelPackage = generatorConfig.getModelPackage();
+        int index = modelPackage.lastIndexOf(".");
+        context.addProperty("examplePackage", modelPackage.substring(0, index) + ".example");
+        PluginConfiguration exampleTargetPlugin = new PluginConfiguration();
+        exampleTargetPlugin.addProperty("type", "com.zzg.mybatis.generator.plugins.ExampleTargetPlugin");
+        exampleTargetPlugin.setConfigurationType("com.zzg.mybatis.generator.plugins.ExampleTargetPlugin");
+        context.addPluginConfiguration(exampleTargetPlugin);
     }
 
 

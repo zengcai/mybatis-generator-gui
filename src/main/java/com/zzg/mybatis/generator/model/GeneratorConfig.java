@@ -44,7 +44,19 @@ public class GeneratorConfig {
 
 	private boolean countMethod;
 
+	private boolean selectKeyForUpdateMethodCheckBox;
+
+	private boolean useGenKey;
+
+	private boolean batchInsert;
+
 	private boolean annotation;
+
+	private boolean selectOne;
+
+	private boolean insertUpdateAll;
+
+	private boolean selectSelective;
 
 	private String generateKeys;
 
@@ -190,5 +202,53 @@ public class GeneratorConfig {
 
 	public void setCountMethod(boolean countMethod) {
 		this.countMethod = countMethod;
+	}
+
+	public boolean isSelectKeyForUpdateMethodCheckBox() {
+		return selectKeyForUpdateMethodCheckBox;
+	}
+
+	public void setSelectKeyForUpdateMethodCheckBox(boolean selectKeyForUpdateMethodCheckBox) {
+		this.selectKeyForUpdateMethodCheckBox = selectKeyForUpdateMethodCheckBox;
+	}
+
+	public boolean isBatchInsert() {
+		return batchInsert;
+	}
+
+	public void setBatchInsert(boolean batchInsert) {
+		this.batchInsert = batchInsert;
+	}
+
+	public boolean isUseGenKey() {
+		return useGenKey;
+	}
+
+	public void setUseGenKey(boolean useGenKey) {
+		this.useGenKey = useGenKey;
+	}
+
+	public boolean isSelectOne() {
+		return selectOne;
+	}
+
+	public void setSelectOne(boolean selectOne) {
+		this.selectOne = selectOne;
+	}
+
+	public boolean isInsertUpdateAll() {
+		return insertUpdateAll;
+	}
+
+	public void setInsertUpdateAll(boolean insertUpdateAll) {
+		this.insertUpdateAll = insertUpdateAll;
+	}
+
+	public boolean isSelectSelective() {
+		return selectSelective;
+	}
+
+	public void setSelectSelective(boolean selectSelective) {
+		this.selectSelective = selectSelective;
 	}
 }

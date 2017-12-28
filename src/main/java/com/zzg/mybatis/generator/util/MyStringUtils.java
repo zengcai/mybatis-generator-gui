@@ -17,6 +17,8 @@ public class MyStringUtils {
             StringBuilder sb = new StringBuilder();
             if (str.startsWith("t_")) {//表名t_开头的去掉
                 str = str.replaceFirst("t_", "");
+            } else if (str.startsWith("uc_")) {
+                str = str.replaceFirst("uc_", "");
             }
             sb.append(String.valueOf(str.charAt(0)).toUpperCase());
             for (int i = 1; i < str.length(); i++) {

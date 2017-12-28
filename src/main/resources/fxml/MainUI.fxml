@@ -226,16 +226,28 @@
                                                                   GridPane.columnIndex="1" GridPane.rowIndex="8"/>
                                                         <CheckBox fx:id="commentCheckBox" mnemonicParsing="false"
                                                                   selected="true" text="数据库表注释所有POJO的注释"/>
-                                                        <CheckBox fx:id="deleteMethodCheckBox" mnemonicParsing="false"
-                                                                  selected="false" text="delete方法"/>
-                                                        <CheckBox fx:id="countMethodCheckBox" mnemonicParsing="false"
-                                                                  selected="false" text="count方法"/>
+                                                        <CheckBox fx:id="annotationCheckBox" mnemonicParsing="false"
+                                                                  selected="false" text="生成JPA注解"/>
                                                     </children>
                                                 </HBox>
                                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                                     <children>
-                                                        <CheckBox fx:id="annotationCheckBox" mnemonicParsing="false"
-                                                                  selected="false" text="生成JPA注解"/>
+                                                        <CheckBox fx:id="useGenKey" mnemonicParsing="false"
+                                                                  selected="false" text="useGenKey "/>
+                                                        <CheckBox fx:id="selectOne" mnemonicParsing="false"
+                                                                  selected="true" text="selectOne "/>
+                                                        <CheckBox fx:id="selectSelective" mnemonicParsing="false"
+                                                                  selected="false" text="selectSelective "/>
+                                                        <CheckBox fx:id="insertUpdateAll" mnemonicParsing="false"
+                                                                  selected="false" text="insert/update all "/>
+                                                        <CheckBox fx:id="selectKeyForUpdateMethodCheckBox" mnemonicParsing="false"
+                                                                  selected="false" text="selectKeyForUpdate "/>
+                                                        <CheckBox fx:id="deleteMethodCheckBox" mnemonicParsing="false"
+                                                                  selected="false" text="delete "/>
+                                                        <CheckBox fx:id="countMethodCheckBox" mnemonicParsing="false"
+                                                                  selected="false" text="count "/>
+                                                        <CheckBox fx:id="batchInsert" mnemonicParsing="false"
+                                                                  selected="false" text="batchInsert "/>
                                                     </children>
                                                 </HBox>
                                             </children>
@@ -243,6 +255,7 @@
                                                 <Insets left="5.0"/>
                                             </padding>
                                         </VBox>
+
                                         <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0"
                                               GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8">
                                             <children>

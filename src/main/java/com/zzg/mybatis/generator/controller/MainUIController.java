@@ -75,6 +75,18 @@ public class MainUIController extends BaseFXController {
     @FXML
     private CheckBox countMethodCheckBox;
     @FXML
+    private CheckBox useGenKey;
+    @FXML
+    private CheckBox selectOne;
+    @FXML
+    private CheckBox selectSelective;
+    @FXML
+    private CheckBox insertUpdateAll;
+    @FXML
+    private CheckBox selectKeyForUpdateMethodCheckBox;
+    @FXML
+    private CheckBox batchInsert;
+    @FXML
     private CheckBox annotationCheckBox;
     @FXML
     private TreeView<String> leftDBTree;
@@ -295,7 +307,13 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setComment(commentCheckBox.isSelected());
         generatorConfig.setDeleteMethod(deleteMethodCheckBox.isSelected());
         generatorConfig.setCountMethod(countMethodCheckBox.isSelected());
+        generatorConfig.setSelectKeyForUpdateMethodCheckBox(selectKeyForUpdateMethodCheckBox.isSelected());
+        generatorConfig.setBatchInsert(batchInsert.isSelected());
+        generatorConfig.setUseGenKey(useGenKey.isSelected());
+        generatorConfig.setSelectOne(selectOne.isSelected());
         generatorConfig.setAnnotation(annotationCheckBox.isSelected());
+        generatorConfig.setSelectSelective(selectSelective.isSelected());
+        generatorConfig.setInsertUpdateAll(insertUpdateAll.isSelected());
         return generatorConfig;
     }
 
