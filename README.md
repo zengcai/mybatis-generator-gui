@@ -3,7 +3,7 @@ mybatis-generator-gui
 
 mybatis-generator-gui是基于[mybatis generator](http://www.mybatis.org/generator/index.html)开发一款界面工具, 本工具可以使你非常容易及快速生成Mybatis的Java POJO文件及数据库Mapping文件。
 
-![MainUI](https://thumbnail0.baidupcs.com/thumbnail/34ff65ac4c34abaca1b5dd0e6491fa2e?fid=3859937792-250528-416692164134717&time=1514480400&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-ve%2Fu%2B0vor2ZDlOrYbd9xBqNEpp4%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=8397631741973068263&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video)
+![MainUI](https://raw.githubusercontent.com/zengcai/mybatis-generator-gui/master/mybatis-generator-gui.png)
 
 ### 说明
 * useGenKey: insertSelective->record可获取自增主键
