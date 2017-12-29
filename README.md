@@ -16,7 +16,7 @@ mybatis-generator-gui是基于[mybatis generator](http://www.mybatis.org/generat
 * batchInsert: 批量插入
 
 ### 要求
-本工具由于使用了Java 8的众多特性，所以要求 JRE或者JDK 8.0以上版本，对于JDK版本还没有升级的童鞋表示歉意。
+本工具由于使用了Java 8的众多特性，所以要求 JRE或者JDK 8.0以上版本。
 
 ### 启动本软件
 
