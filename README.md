@@ -16,7 +16,7 @@ mybatis-generator-gui是基于[mybatis generator](http://www.mybatis.org/generat
 * batchInsert: 批量插入
 
 ### 要求
-本工具由于使用了Java 8的众多特性，所以要求 JRE或者JDK 8.0以上版本，对于JDK版本还没有升级的童鞋表示歉意。
+本工具由于使用了Java 8的众多特性，所以要求 JRE或者JDK 8.0以上版本。
 
 ### 启动本软件
 
@@ -36,5 +36,5 @@ mybatis-generator-gui是基于[mybatis generator](http://www.mybatis.org/generat
 Eclipse or IntelliJ IDEA中启动, 找到```com.zzg.mybatis.generator.MainUI```类并运行就可以了
 
     
-增加了部分插件来自：
+增加了几个插件,部分来自：
 https://github.com/itfsw/mybatis-generator-plugin
