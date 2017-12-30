@@ -38,3 +38,6 @@ Eclipse or IntelliJ IDEA中启动, 找到```com.zzg.mybatis.generator.MainUI```�
     
 增加了几个插件,部分来自：
 https://github.com/itfsw/mybatis-generator-plugin
+
+- - -
+Licensed under the Apache 2.0 License
