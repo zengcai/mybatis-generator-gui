@@ -29,11 +29,6 @@ public class InsertUpdateAllMethodConfig extends PluginAdapter {
         return false;
     }
 
-    @Override
-    public boolean sqlMapInsertElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
-        return false;
-    }
-
 //update
 
     @Override
