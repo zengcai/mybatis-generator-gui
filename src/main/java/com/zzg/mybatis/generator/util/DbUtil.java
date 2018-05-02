@@ -23,7 +23,7 @@ public class DbUtil {
     private static final Map<String, String> JDBC_JAVA_TYPE = new HashMap<>();
     static {
         JDBC_JAVA_TYPE.put("TINYINT", "Integer");
-        JDBC_JAVA_TYPE.put("BIT", "Integer");
+//        JDBC_JAVA_TYPE.put("BIT", "Integer");
         JDBC_JAVA_TYPE.put("DECIMAL", "BigDecimal");
     }
 

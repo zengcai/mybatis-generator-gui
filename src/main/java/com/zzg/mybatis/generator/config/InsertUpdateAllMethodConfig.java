@@ -29,7 +29,12 @@ public class InsertUpdateAllMethodConfig extends PluginAdapter {
         return false;
     }
 
-//update
+    @Override
+    public boolean sqlMapInsertElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
+        return false;
+    }
+
+    //update
 
     @Override
     public boolean clientUpdateByPrimaryKeyWithBLOBsMethodGenerated(Method method, Interface interfaze, IntrospectedTable introspectedTable) {
