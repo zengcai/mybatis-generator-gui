@@ -84,7 +84,7 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
     public void addModelClassComment(TopLevelClass topLevelClass,
                                 IntrospectedTable introspectedTable) {
         topLevelClass.addJavaDocLine("/**");
-        topLevelClass.addJavaDocLine(" * @author ");
+        topLevelClass.addJavaDocLine(" * @author https://github.com/zengcai/mybatis-generator-gui");
         topLevelClass.addJavaDocLine(" */");
         if(isAnnotations) {
 
