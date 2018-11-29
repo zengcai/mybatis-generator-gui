@@ -144,10 +144,10 @@ public class BatchInsertPlugin extends BasePlugin {
 
         element.addElement(foreachValues);
 
-        if (context.getPlugins().sqlMapInsertElementGenerated(element, introspectedTable)) {
+//        if (context.getPlugins().sqlMapInsertElementGenerated(element, introspectedTable)) {
             document.getRootElement().addElement(element);
             logger.debug("itfsw(批量插入插件):" + introspectedTable.getMyBatis3XmlMapperFileName() + "增加batchInsertSelective实现方法。");
-        }
+//        }
 
         return true;
     }
