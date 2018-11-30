@@ -368,10 +368,21 @@ public class MainUIController extends BaseFXController {
      */
     private boolean checkDirs(GeneratorConfig config) {
 		List<String> dirs = new ArrayList<>();
+
+		String resources = FilenameUtils.normalize(config.getProjectFolder().concat("/").concat(config.getMappingXMLTargetFolder()));
+
 		dirs.add(config.getProjectFolder());
 		dirs.add(FilenameUtils.normalize(config.getProjectFolder().concat("/").concat(config.getModelPackageTargetFolder())));
 		dirs.add(FilenameUtils.normalize(config.getProjectFolder().concat("/").concat(config.getDaoTargetFolder())));
-		dirs.add(FilenameUtils.normalize(config.getProjectFolder().concat("/").concat(config.getMappingXMLTargetFolder())));
+		dirs.add(resources);
+
+		//如果xml文件已近存在则删除(重新生成xml不会覆盖)
+		String xmlPath = resources.concat("/").concat(config.getMappingXMLPackage()).concat("/").concat(config.getMapperName()).concat(".xml");
+        File xmlFile = new File(xmlPath);
+        if (xmlFile.exists()) {
+            xmlFile.delete();
+        }
+
 		boolean haveNotExistFolder = false;
 		for (String dir : dirs) {
 			File file = new File(dir);
